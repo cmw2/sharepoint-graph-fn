@@ -190,22 +190,13 @@ class SharePointGraphClient:
                 drive_id = drive.get("id")
                 logger.info(f"Found drive ID for {self.document_library}: {drive_id}")
                 return drive_id
-                
-        # If not found by name, try to get the default document library
-        logger.warning(f"Document library '{self.document_library}' not found. Trying to get default document library.")
-        
-        for drive in drives:
-            if drive.get("name") == "Documents":
-                drive_id = drive.get("id")
-                logger.info(f"Found default drive ID: {drive_id}")
-                return drive_id
-        
+                        
         # If we get here, no suitable drive was found
         logger.error(f"Failed to find drive. Response data: {json.dumps(response_data, indent=2)}")
         available_drives_str = ", ".join(available_drives) if available_drives else "No drives found"
         raise ValueError(f"Could not find drive for document library: {self.document_library}. Available drives: {available_drives_str}")
 
-    def list_documents(self, site_id: str, drive_id: str, folder_path: str = "") -> List[Dict[str, Any]]:
+    def list_documents_in_drive(self, site_id: str, drive_id: str, folder_path: str = "") -> List[Dict[str, Any]]:
         """
         List documents in the specified folder.
         
@@ -303,9 +294,9 @@ class SharePointGraphClient:
         full_path = f"{doc_path}/{doc_name}" if doc_path else doc_name
         logger.info(f"Found document: {full_path} (ID: {doc_id}, Size: {doc_size} bytes, URL: {doc_url})")
 
-    def process_all_documents(self) -> List[Dict[str, Any]]:
+    def list_documents(self) -> List[Dict[str, Any]]:
         """
-        Process all documents from the document library.
+        List documents from the document library.
         
         Returns:
             List of document information
@@ -315,17 +306,7 @@ class SharePointGraphClient:
         drive_id = self.get_drive_id(site_id)
         
         # List all documents
-        documents = self.list_documents(site_id, drive_id)
-        
-        processed_documents = []
-        
-        # Process each document
-        for document in documents:
-            try:
-                self.log_document(document)
-                processed_documents.append(document)
-            except Exception as e:
-                logger.error(f"Error processing document {document.get('name', 'Unknown')}: {str(e)}")
-                
-        logger.info(f"Processed {len(processed_documents)} documents")
-        return processed_documents
+        documents = self.list_documents_in_drive(site_id, drive_id)
+                        
+        logger.info(f"Processed {len(documents)} documents")
+        return documents

@@ -6,15 +6,5 @@ GET http://localhost:7071/api/httpget?name=Chris HTTP/1.1
 
 ###
 
-POST http://localhost:7071/api/httppost HTTP/1.1
-content-type: application/json
-
-{
-    "name": "John",
-    "age": 30
-}
-
-###
-
 // SharePoint documents list endpoint
-GET http://localhost:7071/api/sharepoint HTTP/1.1
+GET http://localhost:7071/api/sharepoint_docs_list HTTP/1.1
