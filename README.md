@@ -21,6 +21,10 @@ urlFragment: sharepoint-graph-function-azd
 
 This repository contains a serverless API for accessing SharePoint document libraries using Azure Functions, Microsoft Graph API, and managed identity authentication. The solution is deployed to Azure using the Azure Developer CLI (`azd`) and includes security features like managed identity and optional virtual network isolation.
 
+## Sample Code
+
+This repository contains sample code intended for demonstration purposes. It showcases how to integrate Microsoft Graph API for SharePoint document library access using Azure Functions. The code is provided as-is and may require modifications to fit specific use cases or production environments.
+
 ## Features
 
 - **SharePoint Document Library Integration** - Connect to SharePoint Online document libraries and list all documents
@@ -406,12 +410,6 @@ When you're done working with your function app and related resources, you can u
 azd down
 ```
 
-## Further Enhancements
+## Disclaimer
 
-Here are some ways you could enhance this solution:
-
-1. Add document upload/download functionality
-2. Implement search capabilities
-3. Add document metadata handling
-4. Include version history functionality
-5. Add user-based access control
+This Sample Code is provided for the purpose of illustration only and is not intended to be used in a production environment. THIS SAMPLE CODE AND ANY RELATED INFORMATION ARE PROVIDED 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
